@@ -102,3 +102,6 @@ ENV/
 
 # PyCharm stuffs
 .idea/
+
+# SQLite db
+*.db

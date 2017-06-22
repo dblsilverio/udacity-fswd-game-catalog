@@ -7,24 +7,9 @@ Available Games
 {% block active_index %} class="active"{% endblock %}
 
 {% block body %}
-<div class="row">
-    <h3>Category A</h3>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-    <div class="col-md-2">Item</div>
-</div>
+
+{% for category in categories %}
+    <h3><a href="/category/{{ category.id }}">{{ category.name }} <span class="badge">10</span></a></h3>
+{% endfor %}
+
 {% endblock %}

@@ -7,19 +7,29 @@
 {% block active_category %} class="active"{% endblock %}
 
 {% block body %}
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="/category/new" method="post">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="list-group">
+        {% for category, message in messages %}
+            <li class="list-group-item list-group-item-{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
         <fieldset>
             <legend>Insert a New Category</legend>
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" placeholder="Category name">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Category name">
                 </div>
             </div>
             <div class="form-group">
                 <label for="description" class="col-lg-2 control-label">Description</label>
                 <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="description" placeholder="Describe category aspects, famous games and restrictions"></textarea>
+                    <textarea class="form-control" rows="3" id="description" name="description" placeholder="Describe category aspects, famous games and restrictions"></textarea>
                 </div>
             </div>
             <div class="form-group">
