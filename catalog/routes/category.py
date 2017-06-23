@@ -3,6 +3,8 @@ from flask import render_template, request, flash
 
 from catalog.models.category import Category
 from catalog.services.category_service import CategoryService
+from catalog.services.game_service import GameService
+
 
 @app.route('/category', methods=['GET'])
 def category():
@@ -29,7 +31,9 @@ def category_new():
 
 @app.route('/category/<int:cid>', methods=['GET'])
 def category_detail(cid):
-    return render_template("category.html", category=CategoryService().find_by(cid))
+    c = CategoryService().find_by_id(cid)
+    gs = GameService().find_by_category(c)
+    return render_template("category.html", category=c, games=gs)
 
 
 def service():

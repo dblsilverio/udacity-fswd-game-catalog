@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, Text
+from sqlalchemy.orm import relationship
 from catalog.infra.db_factory import Base
 
 
