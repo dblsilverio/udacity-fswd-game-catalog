@@ -1,11 +1,13 @@
 from catalog import app
 from flask import render_template
 
+from catalog.services.category_service import CategoryService
+
 
 @app.route('/')
 @app.route('/catalog')
 def index():
-    return render_template('index.html', categories=service().all())
+    return render_template('index.html', categories=CategoryService().all())
 
 
 @app.route('/login', methods=['GET'])
