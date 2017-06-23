@@ -18,8 +18,3 @@ def login():
 @app.route('/about', methods=['GET'])
 def about():
     return render_template('about.html')
-
-
-def service():
-    from catalog.services.category_service import CategoryService
-    return CategoryService()

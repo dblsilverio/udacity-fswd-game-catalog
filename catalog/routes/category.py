@@ -21,7 +21,7 @@ def category_new():
     new_category = validate_category()
 
     if new_category:
-        if service().new(new_category):
+        if CategoryService().new(new_category):
             flash('New category added', 'success')
         else:
             flash('Error adding category', 'danger')
@@ -34,11 +34,6 @@ def category_detail(cid):
     c = CategoryService().find_by_id(cid)
     gs = GameService().find_by_category(c)
     return render_template("category.html", category=c, games=gs)
-
-
-def service():
-    from catalog.services.category_service import CategoryService
-    return CategoryService()
 
 
 def validate_category():
