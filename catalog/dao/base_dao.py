@@ -1,7 +1,8 @@
-from catalog.__init__ import DBSession
+from catalog.infra.db_factory import DBSession
 
 
 class BaseDao:
+    """ Base class for models. """
 
     def __init__(self):
         self.session = DBSession();

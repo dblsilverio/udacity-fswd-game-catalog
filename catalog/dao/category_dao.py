@@ -3,6 +3,7 @@ from catalog.models.category import Category
 
 
 class CategoryDao(BaseDao):
+    """ Manages data access for Category entities. """
 
     def find_all(self):
         return self.session.query(Category).order_by(Category.name)

@@ -2,6 +2,7 @@ from catalog.dao.category_dao import CategoryDao
 
 
 class CategoryService:
+    """ Provider of common services and operations for a Category entity. """
 
     def __init__(self):
         self.dao = CategoryDao()
