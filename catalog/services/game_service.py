@@ -1,5 +1,6 @@
 from catalog.dao.game_dao import GameDao
 
+
 class GameService:
     """ Provider of common services and operations for a Game entity. """
 
