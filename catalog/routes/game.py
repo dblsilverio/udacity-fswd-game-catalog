@@ -9,6 +9,7 @@ from catalog.services.game_service import GameService
 
 
 @app.route('/game/new', methods=['GET'])
+@protected
 def game_form():
     categories = CategoryService().all()
 
@@ -19,8 +20,8 @@ def game_form():
     return render_template("game_form.html", categories=categories)
 
 
-@app.route('/game/new', methods=['POST'])
 @protected
+@app.route('/game/new', methods=['POST'])
 def game_new():
     game = validate_game()
     print game
@@ -42,6 +43,24 @@ def game_detail(gid):
         return redirect("/")
 
     return render_template("game.html", game=game)
+
+
+@protected
+@app.route('/game/<int:gid>/delete', methods=['POST'])
+def delete_game(gid):
+    pass
+
+
+@protected
+@app.route('/game/<int:gid>/update', methods=['GET'])
+def update_game_form(gid):
+    pass
+
+
+@protected
+@app.route('/game/<int:gid>/update', methods=['POST'])
+def update_game(gid):
+    pass
 
 
 def validate_game():

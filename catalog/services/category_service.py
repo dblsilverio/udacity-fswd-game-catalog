@@ -20,3 +20,6 @@ class CategoryService:
 
     def all(self):
         return self.dao.find_all()
+
+    def delete(self, category):
+        self.dao.delete(category)

@@ -15,4 +15,11 @@ class CategoryDao(BaseDao):
     def merge(self, category):
         self.session.merge(category)
 
+    @transacted
+    def delete(self, category):
+        games = category.games
 
+        for game in games:
+            self.session.delete(game)
+
+        self.session.delete(category)
