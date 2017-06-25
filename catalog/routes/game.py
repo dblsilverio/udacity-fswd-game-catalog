@@ -48,7 +48,20 @@ def game_detail(gid):
 @protected
 @app.route('/game/<int:gid>/delete', methods=['POST'])
 def delete_game(gid):
-    pass
+    game_service = GameService()
+
+    game = game_service.find_by(gid)
+
+    if not game:
+        flash('Game not found', 'warning')
+
+    try:
+        game_service.delete(game)
+        flash('Game removed', 'info')
+    except Exception as e:
+        flash('Error deleting game: %s' % e.message, 'danger')
+
+    return redirect('/')
 
 
 @protected

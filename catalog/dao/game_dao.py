@@ -18,3 +18,6 @@ class GameDao(BaseDao):
     def find_by_category(self, c):
         return self.session.query(Game).filter(Game.category == c).all()
 
+    @transacted
+    def delete(self, game):
+        self.session.delete(game)

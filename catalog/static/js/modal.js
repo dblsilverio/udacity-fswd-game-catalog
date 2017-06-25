@@ -20,3 +20,22 @@ function delete_category(cid, name) {
     });
 
 }
+
+function delete_game(gid, name) {
+
+    document.getElementById('confirmation_text').innerHTML = 'Do you confirm' +
+        ' the removal of <b><i>' +
+        name + '</i></b>?';
+
+    document.getElementById('operation_btn').addEventListener('click', function () {
+        var delForm = document.createElement('form');
+        delForm.id = 'game_deletion_frm';
+        delForm.method = 'post';
+        delForm.action = '/game/' + gid + '/delete';
+        document.body.appendChild(delForm);
+
+        delForm.submit();
+        document.body.removeChild(delForm);
+    });
+
+}

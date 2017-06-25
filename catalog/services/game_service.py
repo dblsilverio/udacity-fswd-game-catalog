@@ -23,3 +23,6 @@ class GameService:
 
     def all(self):
         return self.dao.find_all()
+
+    def delete(self, game):
+        self.dao.delete(game)
