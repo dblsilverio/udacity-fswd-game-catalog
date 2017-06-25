@@ -19,8 +19,22 @@ class Game(Base):
     category = relationship("Category", backref="games", lazy="joined")
     created = Column(DateTime, default=datetime.now())
 
+    def reset(self):
+        self.id = 0
+        self.name = ''
+        self.developer = ''
+        self.publisher = ''
+        self.platform = ''
+        self.thumb = ''
+        self.synopsis = ''
+        self.category_id = 0
+        self.category = None
+        self.created = None
+
+        return self
+
     def platforms(self):
-        plat_str = self.platform.split('|')
+        plat_str = Game.plat_array(self.platform)
         plat_arr = []
 
         for plat in plat_str:
@@ -32,3 +46,10 @@ class Game(Base):
                 plat_arr.append('PS4')
 
         return plat_arr
+
+    def has_platform(self, name):
+        return name in Game.plat_array(self.platform)
+
+    @staticmethod
+    def plat_array(plat_str):
+        return plat_str.split('|')

@@ -8,6 +8,11 @@ from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
 
 
+@app.route('/game', methods=['GET'])
+def game():
+    return render_template("game_index.html")
+
+
 @app.route('/game/new', methods=['GET'])
 @protected
 def game_form():
@@ -15,9 +20,10 @@ def game_form():
 
     if not categories.count():
         flash('Please, register at least one category.', 'info')
-        return render_template("category_form.html")
+        return redirect("/category/new")
 
-    return render_template("game_form.html", categories=categories)
+    return render_template("game_form.html", categories=categories,
+                           game=Game().reset(), target_url="/game/new")
 
 
 @protected
@@ -40,7 +46,7 @@ def game_detail(gid):
 
     if not game:
         flash("Game with id %d not found" % gid, "warning")
-        return redirect("/")
+        return redirect("/game")
 
     return render_template("game.html", game=game)
 
@@ -50,30 +56,51 @@ def game_detail(gid):
 def delete_game(gid):
     game_service = GameService()
 
-    game = game_service.find_by(gid)
+    g = game_service.find_by(gid)
 
-    if not game:
+    if not g:
         flash('Game not found', 'warning')
 
     try:
-        game_service.delete(game)
+        game_service.delete(g)
         flash('Game removed', 'info')
     except Exception as e:
         flash('Error deleting game: %s' % e.message, 'danger')
 
-    return redirect('/')
+    return redirect('/game')
 
 
 @protected
 @app.route('/game/<int:gid>/update', methods=['GET'])
 def update_game_form(gid):
-    pass
+    game_service = GameService()
+    category_service = CategoryService()
+
+    g = game_service.find_by(gid)
+
+    if not g:
+        flash('Game not found', 'warning')
+        return redirect('/game')
+
+    return render_template("game_form.html", game=g,
+                           target_url="/game/%d/update" % g.id,
+                           categories=category_service.all())
 
 
 @protected
 @app.route('/game/<int:gid>/update', methods=['POST'])
 def update_game(gid):
-    pass
+    updated_game = validate_game()
+
+    if update_game:
+        updated_game.id = gid
+
+        if GameService().new(updated_game):
+            flash('Game updated', 'success')
+        else:
+            flash('Error updating game', 'danger')
+
+    return redirect('/game')
 
 
 def validate_game():
@@ -118,7 +145,8 @@ def validate_game():
         flash('Come back later and write a good synopsis to help other players!', 'warning')
 
     if not invalid:
-        return Game(name=name, developer=developer, publisher=publisher, platform=platform, thumb=thumb,
+        return Game(name=name, developer=developer, publisher=publisher,
+                    platform=platform, thumb=thumb,
                     synopsis=synopsis, category_id=category)
     else:
         return None
