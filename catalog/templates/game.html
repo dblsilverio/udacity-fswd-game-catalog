@@ -1,10 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Item</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}
+    {{ game.name }} by {{ game.publisher }}
+{% endblock %}
+
+{% block body %}
+    <form class="form-horizontal" action="/game/new" method="post">
+        <fieldset>
+            <legend><b>{{ game.name }}</b></legend>
+            <div class="form-group">
+                <img
+                        src="{{ game.thumb }}"
+                        class="col-md-2 thumb">{{ game.synopsis }} </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <span style="font-weight: bold">Developer: </span> {{ game
+                    .developer }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <span style="font-weight: bold">Publisher: </span> {{ game
+                    .publisher }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <span style="font-weight: bold">Platform(s): </span> {{ game
+                    .platforms() | join(', ') }}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10">
+                    <span style="font-weight: bold">Category: </span> {{ game
+                    .category.name }}
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

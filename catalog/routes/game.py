@@ -1,6 +1,8 @@
 from catalog import app
 from flask import render_template, request, flash, redirect
 
+from .security import protected
+
 from catalog.models.game import Game
 from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
@@ -18,6 +20,7 @@ def game_form():
 
 
 @app.route('/game/new', methods=['POST'])
+@protected
 def game_new():
     game = validate_game()
     print game
@@ -30,9 +33,15 @@ def game_new():
     return redirect('/game/new')
 
 
-@app.route('/game/<int:id>', methods=['GET'])
-def game_detail():
-    return render_template("game_form.html")
+@app.route('/game/<int:gid>', methods=['GET'])
+def game_detail(gid):
+    game = GameService().find_by(gid)
+
+    if not game:
+        flash("Game with id %d not found" % gid, "warning")
+        return redirect("/")
+
+    return render_template("game.html", game=game)
 
 
 def validate_game():

@@ -16,5 +16,19 @@ class Game(Base):
     thumb = Column(String(500), nullable=True)
     synopsis = Column(Text, nullable=True)
     category_id = Column(Integer, ForeignKey('category.id'))
-    category = relationship("Category", backref="games")
+    category = relationship("Category", backref="games", lazy="joined")
     created = Column(DateTime, default=datetime.now())
+
+    def platforms(self):
+        plat_str = self.platform.split('|')
+        plat_arr = []
+
+        for plat in plat_str:
+            if plat == 'pc':
+                plat_arr.append('PC')
+            elif plat == 'xo':
+                plat_arr.append('Xbox One')
+            elif plat == 'ps':
+                plat_arr.append('PS4')
+
+        return plat_arr

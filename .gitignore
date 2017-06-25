@@ -105,3 +105,4 @@ ENV/
 
 # SQLite db
 *.db
+*.bkp
