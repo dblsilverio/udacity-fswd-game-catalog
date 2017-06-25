@@ -7,7 +7,7 @@ from catalog.services.category_service import CategoryService
 @app.route('/')
 @app.route('/catalog')
 def index():
-    return render_template('index.html', categories=CategoryService().all())
+    return render_template('index.html')
 
 
 @app.route('/login', methods=['GET'])

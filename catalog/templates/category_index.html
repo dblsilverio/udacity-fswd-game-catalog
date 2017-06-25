@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Available Games
+    Categories
 {% endblock %}
 
-{% block active_index %} class="active"{% endblock %}
+{% block active_category %}active{% endblock %}
 
 {% block body %}
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -16,5 +16,9 @@
             </ul>
         {% endif %}
     {% endwith %}
+    {% for category in categories %}
+        <h3><a href="/category/{{ category.id }}">{{ category.name }} <span
+                class="badge">{{ category.games | length }}</span></a></h3>
+    {% endfor %}
 
 {% endblock %}
