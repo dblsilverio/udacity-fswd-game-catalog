@@ -20,5 +20,8 @@
         <h3><a href="/category/{{ category.id }}">{{ category.name }} <span
                 class="badge">{{ category.games | length }}</span></a></h3>
     {% endfor %}
-
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+            data-target="#confirmation_modal">
+        Launch demo modal
+    </button>
 {% endblock %}

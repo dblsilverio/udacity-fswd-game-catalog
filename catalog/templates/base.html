@@ -8,7 +8,13 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"-->
-    <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://bootswatch.com/united/bootstrap.min.css">
     <script src="https://use.fontawesome.com/d0801f57b6.js"></script>
 </head>
 <body>
@@ -21,21 +27,53 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li{% block active_index %}{% endblock %}><a href="/">Home</a></li>
-                    <li{% block active_category %}{% endblock %}><a href="/category/new">New Category</a></li>
-                    <li{% block active_game %}{% endblock %}><a href="/game/new">New Game</a></li>
-                    <li{% block active_about %}{% endblock %}><a href="/about">About</a></li>
+                    <li{% block active_index %}{% endblock %}><a
+                            href="/">Home</a></li>
+                    <li{% block active_category %}{% endblock %}><a
+                            href="/category/new">New Category</a></li>
+                    <li{% block active_game %}{% endblock %}><a
+                            href="/game/new">New Game</a></li>
+                    <li{% block active_about %}{% endblock %}><a href="/about">About</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" role="button">Login with <i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                    <li><a href="#" role="button">Login with <i
+                            class="fa fa-facebook-official"
+                            aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
-<!-- Breadcrumb -->
+    <!-- Breadcrumb -->
     {% block body %}
     {% endblock %}
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="confirmation_modal" tabindex="-1" role="dialog"
+     aria-labelledby="confirmation_modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirmation_modalLabel">
+                    Confirmation
+                    needed</h4>
+            </div>
+            <div class="modal-body">
+                <span id="confirmation_text"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        data-dismiss="modal">No
+                </button>
+                <button type="button" class="btn btn-primary"
+                        id="operation_btn">Yes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
