@@ -7,7 +7,7 @@
 {% block active_category %}active{% endblock %}
 
 {% block body %}
-    <form class="form-horizontal" action="/category/new" method="post">
+    <form class="form-horizontal" action="{{ target_url }}" method="post">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <ul class="list-group">
@@ -24,7 +24,8 @@
                 <label for="name" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="name"
-                           name="name" placeholder="Category name">
+                           name="name" placeholder="Category name" value="{{
+                            category.name }}">
                 </div>
             </div>
             <div class="form-group">
@@ -32,7 +33,8 @@
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="3" id="description"
                               name="description"
-                              placeholder="Describe category aspects, famous games and restrictions"></textarea>
+                              placeholder="Describe category aspects, famous games and restrictions">{{ category.description
+                            }}</textarea>
                 </div>
             </div>
             <div class="form-group">

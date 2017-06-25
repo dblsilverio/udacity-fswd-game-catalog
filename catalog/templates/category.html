@@ -9,7 +9,8 @@
 {% block body %}
     <h3><b>{{ games|length }}</b> game(s) found for <b>{{ category.name }}</b>
         category
-        <button class="btn btn-warning btn-sm">Edit</button>&nbsp;
+        <a class="btn btn-warning btn-sm" href="/category/{{ category.id
+                }}/update">Edit</a>&nbsp;
         <button class="btn btn-danger btn-sm" data-toggle="modal"
             data-target="#confirmation_modal"
                 onclick="delete_category({{ category.id }},'{{ category.name

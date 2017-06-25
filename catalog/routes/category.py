@@ -10,13 +10,15 @@ from catalog.services.game_service import GameService
 
 @app.route('/category', methods=['GET'])
 def category():
-    return render_template("category_index.html", categories=CategoryService().all())
+    return render_template("category_index.html",
+                           categories=CategoryService().all())
 
 
 @protected
 @app.route('/category/new', methods=['GET'])
 def category_form():
-    return render_template("category_form.html")
+    return render_template("category_form.html", target_url="/category/new",
+                           category=Category(name='', description=''))
 
 
 @protected
@@ -30,7 +32,7 @@ def category_new():
         else:
             flash('Error adding category', 'danger')
 
-    return render_template("category_form.html")
+    return redirect('/category')
 
 
 @app.route('/category/<int:cid>', methods=['GET'])
@@ -38,7 +40,7 @@ def category_detail(cid):
     c = CategoryService().find_by_id(cid)
     if not c:
         flash('Category not found', 'warning')
-        return redirect('/')
+        return redirect('/category')
 
     gs = GameService().find_by_category(c)
 
@@ -60,19 +62,36 @@ def delete_category(cid):
     except Exception as e:
         flash("Error deleting category: %s" % e.message, 'danger')
 
-    return redirect('/')
+    return redirect('/category')
 
 
 @protected
 @app.route('/category/<int:cid>/update', methods=['GET'])
 def update_category_form(cid):
-    pass
+    cat = CategoryService().find_by_id(cid)
+
+    if not cat:
+        flash('Category does not exists')
+        return redirect('/category')
+
+    return render_template("category_form.html", category=cat,
+                           target_url="/category/%d/update" % cat.id)
 
 
 @protected
 @app.route('/category/<int:cid>/update', methods=['POST'])
 def update_category(cid):
-    pass
+    updated_category = validate_category()
+
+    if updated_category:
+        updated_category.id = cid
+
+        if CategoryService().new(updated_category):
+            flash('Category updated', 'success')
+        else:
+            flash('Error updating category', 'danger')
+
+    return redirect('/category')
 
 
 def validate_category():
