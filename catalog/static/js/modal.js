@@ -8,16 +8,8 @@ function delete_category(cid, name) {
         ' the removal of category <b><i>' +
         name + '</i></b>?';
 
-    document.getElementById('operation_btn').addEventListener('click', function () {
-        var delForm = document.createElement('form');
-        delForm.id = 'category_deletion_frm';
-        delForm.method = 'post';
-        delForm.action = '/category/' + cid + '/delete';
-        document.body.appendChild(delForm);
+    document.getElementById('operation_btn').addEventListener('click', deleteForm('/category/' + cid + '/delete'));
 
-        delForm.submit();
-        document.body.removeChild(delForm);
-    });
 
 }
 
@@ -27,15 +19,16 @@ function delete_game(gid, name) {
         ' the removal of <b><i>' +
         name + '</i></b>?';
 
-    document.getElementById('operation_btn').addEventListener('click', function () {
-        var delForm = document.createElement('form');
-        delForm.id = 'game_deletion_frm';
-        delForm.method = 'post';
-        delForm.action = '/game/' + gid + '/delete';
-        document.body.appendChild(delForm);
-
-        delForm.submit();
-        document.body.removeChild(delForm);
-    });
-
+    document.getElementById('operation_btn').addEventListener('click', deleteForm('/game/' + gid + '/delete'));
 }
+
+var deleteForm = function (url) {
+    var delForm = document.createElement('form');
+    delForm.id = 'deletion_frm';
+    delForm.method = 'post';
+    delForm.action = url;
+    document.body.appendChild(delForm);
+
+    delForm.submit();
+    document.body.removeChild(delForm);
+};
