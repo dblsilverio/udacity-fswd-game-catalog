@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 
 {% block title %}
-Available Games
+    Available Games
 {% endblock %}
 
 {% block active_index %} class="active"{% endblock %}
 
 {% block body %}
-
-{% for category in categories %}
-    <h3><a href="/category/{{ category.id }}">{{ category.name }} <span class="badge">{{ category.games | length }}</span></a></h3>
-{% endfor %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="list-group">
+                {% for category, message in messages %}
+                    <li class="list-group-item list-group-item-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% for category in categories %}
+        <h3><a href="/category/{{ category.id }}">{{ category.name }} <span
+                class="badge">{{ category.games | length }}</span></a></h3>
+    {% endfor %}
 
 {% endblock %}

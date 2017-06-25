@@ -22,52 +22,61 @@
             <div class="form-group">
                 <label for="name" class="col-lg-2 control-label">Name</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                    <input type="text" class="form-control" id="name"
+                           name="name" placeholder="Name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="developer" class="col-lg-2 control-label">Developer</label>
+                <label for="developer"
+                       class="col-lg-2 control-label">Developer</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="developer" name="developer" placeholder="Developer">
+                    <input type="text" class="form-control" id="developer"
+                           name="developer" placeholder="Developer">
                 </div>
             </div>
             <div class="form-group">
-                <label for="publisher" class="col-lg-2 control-label">Publisher</label>
+                <label for="publisher"
+                       class="col-lg-2 control-label">Publisher</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Publisher">
+                    <input type="text" class="form-control" id="publisher"
+                           name="publisher" placeholder="Publisher">
                 </div>
             </div>
             <div class="form-group">
                 <label for="platforms_checks" class="col-lg-2 control-label">Platform(s)</label>
-                <span id="platforms_checks">
-                <div class="col-lg-3">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="platform" value="pc"> PC
-                        </label>
+                <div id="platforms_checks">
+                    <div class="col-lg-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="platform"
+                                       value="pc"> PC
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="platform"
+                                       value="ps"> PS4
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="platform"
+                                       value="xo"> Xbox One
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="platform" value="ps"> PS4
-                        </label>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="platform" value="xo"> Xbox One
-                        </label>
-                    </div>
-                </div>
-                    </span>
             </div>
             <div class="form-group">
                 <div class="form-group">
                     <label for="category" class="col-lg-2 control-label">Category</label>
                     <div class="col-lg-10">
-                        <select class="form-control" id="category" name="category">
+                        <select class="form-control" id="category"
+                                name="category">
                             {% for category in categories %}
                                 <option value="{{ category.id }}">{{ category.name }}</option>
                             {% endfor %}
@@ -75,24 +84,31 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="thumb_url" class="col-lg-2 control-label">Thumb URL</label>
+                    <label for="thumb_url" class="col-lg-2 control-label">Thumb
+                        URL</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="thumb_url" name="thumb_url" placeholder="Thumb">
+                        <input type="text" class="form-control" id="thumb_url"
+                               name="thumb_url" placeholder="Thumb">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="synopsis" class="col-lg-2 control-label">Game Synopsis</label>
+                    <label for="synopsis" class="col-lg-2 control-label">Game
+                        Synopsis</label>
                     <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="synopsis" name="synopsis"
+                    <textarea class="form-control" rows="3" id="synopsis"
+                              name="synopsis"
                               placeholder="Describe the game plot, nice features, world..."></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-lg-10 col-lg-offset-2">
-                        <button type="reset" class="btn btn-default">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-default">Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">Submit
+                        </button>
                     </div>
                 </div>
+            </div>
         </fieldset>
     </form>
 {% endblock %}
