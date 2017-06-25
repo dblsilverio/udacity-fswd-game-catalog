@@ -8,7 +8,13 @@ from catalog.services.game_service import GameService
 
 @app.route('/game/new', methods=['GET'])
 def game_form():
-    return render_template("game_form.html", categories=CategoryService().all())
+    categories = CategoryService().all()
+
+    if not categories.count():
+        flash('Please, register at least one category.', 'info')
+        return render_template("category_form.html")
+
+    return render_template("game_form.html", categories=categories)
 
 
 @app.route('/game/new', methods=['POST'])
