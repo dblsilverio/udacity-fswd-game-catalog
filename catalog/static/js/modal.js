@@ -8,7 +8,11 @@ function delete_category(cid, name) {
         ' the removal of category <b><i>' +
         name + '</i></b>?';
 
-    document.getElementById('operation_btn').addEventListener('click', deleteForm('/category/' + cid + '/delete'));
+    var deleteFormWrapper = function(){
+        deleteForm('/category/' + cid + '/delete');
+    };
+
+    document.getElementById('operation_btn').addEventListener('click', deleteFormWrapper);
 
 
 }
@@ -19,7 +23,11 @@ function delete_game(gid, name) {
         ' the removal of <b><i>' +
         name + '</i></b>?';
 
-    document.getElementById('operation_btn').addEventListener('click', deleteForm('/game/' + gid + '/delete'));
+    var deleteFormWrapper = function(){
+        deleteForm('/game/' + gid + '/delete');
+    };
+
+    document.getElementById('operation_btn').addEventListener('click', deleteFormWrapper);
 }
 
 var deleteForm = function (url) {
