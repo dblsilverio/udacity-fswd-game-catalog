@@ -92,7 +92,7 @@ def update_game_form(gid):
 def update_game(gid):
     updated_game = validate_game()
 
-    if update_game:
+    if updated_game:
         updated_game.id = gid
 
         if GameService().new(updated_game):

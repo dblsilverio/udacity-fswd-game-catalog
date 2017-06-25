@@ -19,7 +19,8 @@
     <div class="form-group">
         <img
                 src="{{ game.thumb }}"
-                class="col-md-2 thumb">{{ game.synopsis }} </div>
+                class="col-md-2 thumb">{{ game.synopsis | replace("\n",
+                "<br>") | safe}} </div>
     <div class="form-group">
         <div class="col-lg-10">
             <span style="font-weight: bold">Developer: </span> {{ game
