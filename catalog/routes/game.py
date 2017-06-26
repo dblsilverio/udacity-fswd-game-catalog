@@ -10,7 +10,10 @@ from catalog.services.game_service import GameService
 
 @app.route('/game', methods=['GET'])
 def game():
-    return render_template("game_index.html", games=GameService().all())
+    return render_template("game_index.html", games_scope="All Games",
+                           games=GameService(
+
+    ).all())
 
 
 @app.route('/game/new', methods=['GET'])
@@ -101,6 +104,19 @@ def update_game(gid):
             flash('Error updating game', 'danger')
 
     return redirect('/game')
+
+
+@app.route('/game/platform/<string:plat>', methods=['GET'])
+def platform_games(plat):
+    platform_results = GameService().find_by_platform(plat)
+
+    if not platform_results['platform']:
+        flash('Invalid platform provided', 'warning')
+        return redirect('/game')
+
+    return render_template('game_index.html',
+                           games_scope=platform_results['platform'],
+                           games=platform_results['games'])
 
 
 def validate_game():

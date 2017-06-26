@@ -26,3 +26,22 @@ class GameService:
 
     def delete(self, game):
         self.dao.delete(game)
+
+    def find_by_platform(self, plat):
+        plat_name = GameService.mapped_platforms(plat)
+
+        if not plat_name:
+            return {'platform': None, 'games': None}
+
+        games = self.dao.find_by_platform(plat)
+
+        return {'platform': plat_name + ' Games', 'games': games}
+
+    @staticmethod
+    def mapped_platforms(plat):
+        if plat == 'pc':
+            return 'PC'
+        elif plat == 'xo':
+            return 'Xbox One'
+        elif plat == 'ps':
+            return 'PS4'

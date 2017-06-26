@@ -21,3 +21,7 @@ class GameDao(BaseDao):
     @transacted
     def delete(self, game):
         self.session.delete(game)
+
+    def find_by_platform(self, plat):
+        return self.session.query(Game).filter(Game.platform.like("%%%s%%" %
+                                                                  plat))
