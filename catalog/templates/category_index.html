@@ -6,6 +6,8 @@
 
 {% block active_category %}active{% endblock %}
 
+{% import 'macros/game_box.html' as game_box %}
+
 {% block breadcrumbs %}
     {% import 'macros/breadcrumbs.html' as bread %}
     {{ bread.print([{'name': 'Home', 'url': '/'}, {'name': 'Categories',
@@ -23,8 +25,17 @@
         {% endif %}
     {% endwith %}
     {% for category in categories %}
-        <h3><a href="/category/{{ category.id }}">{{ category.name }} <span
+        <div class="row">
+            <div class="col-md-12">
+                <h3><a href="/category/{{ category.id }}">{{ category.name }} <span
                 class="badge">{{ category.games | length }}</span></a></h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for game in category.top_games(4) %}
+                {{ game_box.simple_box(game, 3) }}
+            {% endfor %}
+        </div>
     {% endfor %}
 
 {% endblock %}

@@ -9,3 +9,6 @@ class Category(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=False)
+
+    def top_games(self, top):
+        return self.games[0:top]

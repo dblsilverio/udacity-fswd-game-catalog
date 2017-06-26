@@ -19,8 +19,15 @@ class GameDao(BaseDao):
     def merge(self, game):
         self.session.merge(game)
 
-    def find_by_category(self, c):
-        return self.session.query(Game).filter(Game.category == c).all()
+    def find_by_category(self, c, limit=0):
+        query = self.session.query(Game).filter(Game.category == c)
+
+        if limit:
+            query = list(query.limit(limit))
+        else:
+            query = query.all()
+
+        return query
 
     @transacted
     def delete(self, game):

@@ -18,8 +18,8 @@ class GameService:
     def find_by(self, gid):
         return self.dao.find_by_id(gid)
 
-    def find_by_category(self, c):
-        return self.dao.find_by_category(c)
+    def find_by_category(self, c, limit=0):
+        return self.dao.find_by_category(c, limit)
 
     def all(self):
         return self.dao.find_all()
