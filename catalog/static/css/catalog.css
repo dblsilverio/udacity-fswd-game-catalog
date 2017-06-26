@@ -30,6 +30,14 @@ body {
     font-style: italic;
 }
 
+.simple_box > a {
+    text-decoration: none !important;
+}
+
+.simple_box > img {
+    max-height: 140px;
+}
+
 /*
 Dropdown submenu
  */

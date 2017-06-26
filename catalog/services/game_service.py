@@ -37,6 +37,15 @@ class GameService:
 
         return {'platform': plat_name + ' Games', 'games': games}
 
+    def latest(self, batch_num):
+        return self.dao.latest(batch_num)
+
+    def increment(self, gid):
+        self.dao.increment(gid)
+
+    def top10(self):
+        return self.dao.top10()
+
     @staticmethod
     def mapped_platforms(plat):
         if plat == 'pc':

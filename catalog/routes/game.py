@@ -2,6 +2,7 @@ from catalog import app
 from flask import render_template, request, flash, redirect
 
 from .security import protected
+from .utils import page_view
 
 from catalog.models.game import Game
 from catalog.services.category_service import CategoryService
@@ -11,9 +12,7 @@ from catalog.services.game_service import GameService
 @app.route('/game', methods=['GET'])
 def game():
     return render_template("game_index.html", games_scope="All Games",
-                           games=GameService(
-
-    ).all())
+                           games=GameService().all())
 
 
 @app.route('/game/new', methods=['GET'])
@@ -44,6 +43,7 @@ def game_new():
 
 
 @app.route('/game/<int:gid>', methods=['GET'])
+@page_view
 def game_detail(gid):
     game = GameService().find_by(gid)
 
@@ -100,6 +100,7 @@ def update_game(gid):
 
         if GameService().new(updated_game):
             flash('Game updated', 'success')
+            return redirect("/game/%d" % updated_game.id)
         else:
             flash('Error updating game', 'danger')
 

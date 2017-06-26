@@ -6,6 +6,8 @@
 
 {% block active_index %} class="active"{% endblock %}
 
+{% import 'macros/game_box.html' as game_box %}
+
 {% block body %}
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -16,5 +18,31 @@
             </ul>
         {% endif %}
     {% endwith %}
+    <div class="row">
+        <div class="col-md-9 col-lg-9">
+            <div class="row">
+                <h2>Latest Games Inserted</h2>
+            </div>
+            <div class="row">{% for game in latest_games %}
+                {{ game_box.simple_box(game, 4) }}
+            {% endfor %}</div>
+        </div>
+        <div class="col-md-3 col-lg-3">
+            <table class="table table-striped table-hover ">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th><h2 class="text-center">Top 10 Views</h2></th>
+                </tr>
+                </thead>
+                <tbody>{% for game in top10 %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><a href="/game/{{ game.id }}">{{ game.name }}</a></td>
+                </tr>{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 {% endblock %}

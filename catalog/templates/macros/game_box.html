@@ -1,0 +1,12 @@
+{% macro simple_box(game, cols) -%}
+    <div class="col-md-{{ cols }} simple_box">
+        <a href="/game/{{ game.id }}">
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">{{ game.name }}</div>
+                <div class="panel-body"><img src="{{ game.thumb }}"
+                                             class="img-responsive center-block">
+                </div>
+            </div>
+        </a>
+    </div>
+{%- endmacro %}

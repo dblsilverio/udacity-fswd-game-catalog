@@ -18,6 +18,7 @@ class Game(Base):
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship("Category", backref="games", lazy="joined")
     created = Column(DateTime, default=datetime.now())
+    views = Column(Integer, default=0)
 
     def reset(self):
         self.id = 0
@@ -30,6 +31,7 @@ class Game(Base):
         self.category_id = 0
         self.category = None
         self.created = None
+        self.views = 0
 
         return self
 
