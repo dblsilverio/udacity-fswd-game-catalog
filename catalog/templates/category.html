@@ -6,6 +6,13 @@
 
 {% block active_category %} class="active"{% endblock %}
 
+{% block breadcrumbs %}
+    {% import 'macros/breadcrumbs.html' as bread %}
+    {{ bread.print([{'name': 'Home', 'url': '/'}, {'name': 'Categories',
+    'url': '/category'}, {'name': category.name, 'url': "/category/%d" %
+    category.id}]) }}
+{% endblock %}
+
 {% block body %}
     <h3><b>{{ games|length }}</b> game(s) found for <b>{{ category.name }}</b>
         category

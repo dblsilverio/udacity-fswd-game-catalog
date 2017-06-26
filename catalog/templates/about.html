@@ -6,6 +6,11 @@
 
 {% block active_about %} class="active"{% endblock %}
 
+{% block breadcrumbs %}
+    {% import 'macros/breadcrumbs.html' as bread %}
+    {{ bread.print([{'name': 'About', 'url': '/about'}]) }}
+{% endblock %}
+
 {% block body %}
     <div class="jumbotron">
         <h2>About Game Catalog Project</h2>

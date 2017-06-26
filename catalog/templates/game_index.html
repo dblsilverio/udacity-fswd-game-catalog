@@ -14,6 +14,12 @@
     </script>
 {% endblock %}
 
+{% block breadcrumbs %}
+    {% import 'macros/breadcrumbs.html' as bread %}
+    {{ bread.print([{'name': 'Home', 'url': '/'}, {'name': 'Games',
+    'url': '/game'}]) }}
+{% endblock %}
+
 {% block active_game %}active{% endblock %}
 
 {% block body %}

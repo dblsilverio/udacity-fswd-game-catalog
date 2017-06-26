@@ -6,6 +6,12 @@
 
 {% block active_category %}active{% endblock %}
 
+{% block breadcrumbs %}
+    {% import 'macros/breadcrumbs.html' as bread %}
+    {{ bread.print([{'name': 'Home', 'url': '/'}, {'name': 'Categories',
+    'url': '/category'}]) }}
+{% endblock %}
+
 {% block body %}
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
