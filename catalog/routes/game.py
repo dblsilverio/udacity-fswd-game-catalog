@@ -10,7 +10,7 @@ from catalog.services.game_service import GameService
 
 @app.route('/game', methods=['GET'])
 def game():
-    return render_template("game_index.html")
+    return render_template("game_index.html", games=GameService().all())
 
 
 @app.route('/game/new', methods=['GET'])
