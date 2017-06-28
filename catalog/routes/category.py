@@ -14,15 +14,15 @@ def category():
     return render_template("category_index.html", categories=categories)
 
 
-@protected
 @app.route('/category/new', methods=['GET'])
+@protected
 def category_form():
     return render_template("category_form.html", target_url="/category/new",
                            category=Category(name='', description=''))
 
 
-@protected
 @app.route('/category/new', methods=['POST'])
+@protected
 def category_new():
     new_category = validate_category()
 
@@ -47,8 +47,8 @@ def category_detail(cid):
     return render_template("category.html", category=c, games=gs)
 
 
-@protected
 @app.route('/category/<int:cid>/delete', methods=['POST'])
+@protected
 def delete_category(cid):
     category_service = CategoryService()
     cat = category_service.find_by_id(cid)
@@ -65,8 +65,8 @@ def delete_category(cid):
     return redirect('/category')
 
 
-@protected
 @app.route('/category/<int:cid>/update', methods=['GET'])
+@protected
 def update_category_form(cid):
     cat = CategoryService().find_by_id(cid)
 
@@ -78,8 +78,8 @@ def update_category_form(cid):
                            target_url="/category/%d/update" % cat.id)
 
 
-@protected
 @app.route('/category/<int:cid>/update', methods=['POST'])
+@protected
 def update_category(cid):
     updated_category = validate_category()
 

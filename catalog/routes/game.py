@@ -28,8 +28,8 @@ def game_form():
                            game=Game().reset(), target_url="/game/new")
 
 
-@protected
 @app.route('/game/new', methods=['POST'])
+@protected
 def game_new():
     game = validate_game()
     print game
@@ -54,8 +54,8 @@ def game_detail(gid):
     return render_template("game.html", game=game)
 
 
-@protected
 @app.route('/game/<int:gid>/delete', methods=['POST'])
+@protected
 def delete_game(gid):
     game_service = GameService()
 
@@ -73,8 +73,8 @@ def delete_game(gid):
     return redirect('/game')
 
 
-@protected
 @app.route('/game/<int:gid>/update', methods=['GET'])
+@protected
 def update_game_form(gid):
     game_service = GameService()
     category_service = CategoryService()
@@ -90,8 +90,8 @@ def update_game_form(gid):
                            categories=category_service.all())
 
 
-@protected
 @app.route('/game/<int:gid>/update', methods=['POST'])
+@protected
 def update_game(gid):
     updated_game = validate_game()
 

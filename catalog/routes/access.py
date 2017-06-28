@@ -12,7 +12,9 @@ def login():
     user_info = FacebookService().authenticate(code)
     session['user'] = new_session(user_info)
 
-    return redirect('/')
+    return_path = request.referrer or '/'
+
+    return redirect(return_path)
 
 
 @app.route('/logout')
