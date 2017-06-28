@@ -1,5 +1,7 @@
 from catalog import app
-from flask import render_template
+from flask import render_template, request
+
+import facebook
 
 from catalog.services.game_service import GameService
 
@@ -13,11 +15,6 @@ def index():
     top10 = game_service.top10()
 
     return render_template('index.html', latest_games=latest_games, top10=top10)
-
-
-@app.route('/login', methods=['GET'])
-def login():
-    return render_template('login.html')
 
 
 @app.route('/about', methods=['GET'])

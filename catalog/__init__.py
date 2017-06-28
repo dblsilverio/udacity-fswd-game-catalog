@@ -9,6 +9,7 @@ app.secret_key = str(uuid4())
 import catalog.routes.main
 import catalog.routes.category
 import catalog.routes.game
+import catalog.routes.access
 
 create()
 Bootstrap.create_categories()

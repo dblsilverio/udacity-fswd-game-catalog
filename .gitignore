@@ -106,3 +106,6 @@ ENV/
 # SQLite db
 *.db
 *.bkp
+
+# Catalog properties
+/configs/catalog.ini

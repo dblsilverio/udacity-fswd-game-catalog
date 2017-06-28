@@ -11,7 +11,10 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet"
           href="https://bootswatch.com/united/bootstrap.min.css">
+    <link rel="stylesheet" href="http://codeseven.github.io/toastr/build/toastr.min.css">
     <script src="https://use.fontawesome.com/d0801f57b6.js"></script>
+    <script src="http://codeseven.github.io/toastr/build/toastr.min.js"></script>
+
     {% block extra_imports %}{% endblock %}
 </head>
 <body>
@@ -26,8 +29,7 @@
                 <ul class="nav navbar-nav">
                     <li{% block active_index %}{% endblock %}><a
                             href="/">Home</a></li>
-                    <li class="dropdown {% block active_category %}{%
-                            endblock %}">
+                    <li class="dropdown {% block active_category %}{% endblock %}">
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown" role="button"
                            aria-expanded="false">Categories <span
@@ -37,8 +39,7 @@
                             <li><a href="/category/new">New Category</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown {% block active_game %}{%
-                            endblock %}">
+                    <li class="dropdown {% block active_game %}{% endblock %}">
                         <a href="#" class="dropdown-toggle"
                            data-toggle="dropdown" role="button"
                            aria-expanded="false">Games <span
@@ -48,25 +49,31 @@
                             <li><a href="/game/new">New Game</a></li>
                             <li class="divider"></li>
                             <li class="dropdown-submenu">
-                            <a href="#" class="dropdown-toggle"
-                               data-toggle="dropdown">Plaftorms</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/game/platform/pc">PC</a></li>
-                                <li><a href="/game/platform/ps">Playstation
-                                    4</a></li>
-                                <li><a href="/game/platform/xo">XBox
-                                    One</a></li>
-                            </ul>
-                        </li>
+                                <a href="#" class="dropdown-toggle"
+                                   data-toggle="dropdown">Plaftorms</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/game/platform/pc">PC</a></li>
+                                    <li><a href="/game/platform/ps">Playstation
+                                        4</a></li>
+                                    <li><a href="/game/platform/xo">XBox
+                                        One</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li{% block active_about %}{% endblock %}><a href="/about">About</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" role="button">Login with <i
+                    {% if not session['user'] %}
+                    <li><a href="/auth" role="button">Login with <i
                             class="fa fa-facebook-official"
                             aria-hidden="true"></i></a></li>
+                    {% else %}
+                        <li><img class="img-responsive img-rounded" src="{{ session['user']['picture'] }}"></li>
+                        <li><a><b>{{ session['user']['name'] }}</b></a></li>
+                        <li><a href="/logout">[Sair]</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
