@@ -109,3 +109,4 @@ ENV/
 
 # Catalog properties
 /configs/catalog.ini
+img/p/
