@@ -16,6 +16,9 @@ class UserService:
     def __init__(self):
         self.dao = UserDao()
 
+    def fetch(self, user_info):
+        return self.dao.find_user(user_info)
+
     def fetch_or_create(self, user_info):
         logged_user = User.build(user_info)
         u = self.dao.find_user(logged_user)

@@ -1,5 +1,10 @@
 from sqlalchemy.sql import text
 
+from flask import session
+
+from catalog.services.user_service import UserService
+from catalog.models.user import User
+
 from catalog.dao.base_dao import BaseDao, transacted
 from catalog.models.game import Game
 
@@ -17,6 +22,7 @@ class GameDao(BaseDao):
 
     @transacted
     def merge(self, game):
+        self.associated_user(game)
         self.session.merge(game)
 
     def find_by_category(self, c, limit=0):
@@ -48,3 +54,11 @@ class GameDao(BaseDao):
     @transacted
     def increment(self, gid):
         self.session.execute(text(GameDao.INC_QUERY), {'gid': gid})
+
+    def associated_user(self, game):
+
+        if 'user' in session:
+            user = session['user']
+            game.user = UserService().fetch(User.build(user))
+        else:
+            raise Exception("No valid user is in session")
