@@ -13,14 +13,14 @@
 {% endblock %}
 
 {% block body %}
-    <h3><b>{{ game.name }}</b>
+    <h3><b>{{ game.name }}</b>{% if session['user'] %}
         <a href="/game/{{ game.id }}/update" class="btn btn-warning
         btn-sm">Edit</a>&nbsp;
         <button class="btn btn-danger btn-sm" data-toggle="modal"
                 data-target="#confirmation_modal"
                 onclick="delete_game({{ game.id }},'{{ game.name }}')
                         ">Remove
-        </button>
+        </button>{% endif %}
     </h3>
     <div class="form-group">
         <img

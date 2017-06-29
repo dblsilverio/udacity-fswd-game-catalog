@@ -35,8 +35,8 @@
                            aria-expanded="false">Categories <span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu multi-level" role="menu">
-                            <li><a href="/category">Listing</a></li>
-                            <li><a href="/category/new">New Category</a></li>
+                            <li><a href="/category">Listing</a></li>{% if session['user'] %}
+                            <li><a href="/category/new">New Category</a></li>{% endif %}
                         </ul>
                     </li>
                     <li class="dropdown {% block active_game %}{% endblock %}">
@@ -45,8 +45,8 @@
                            aria-expanded="false">Games <span
                                 class="caret"></span></a>
                         <ul class="dropdown-menu multi-level" role="menu">
-                            <li><a href="/game">Listing</a></li>
-                            <li><a href="/game/new">New Game</a></li>
+                            <li><a href="/game">Listing</a></li>{% if session['user'] %}
+                            <li><a href="/game/new">New Game</a></li>{% endif %}
                             <li class="divider"></li>
                             <li class="dropdown-submenu">
                                 <a href="#" class="dropdown-toggle"

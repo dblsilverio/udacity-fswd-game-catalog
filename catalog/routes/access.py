@@ -17,9 +17,7 @@ def login():
     else:
         session.clear
 
-    return_path = request.referrer or '/'
-
-    return redirect(return_path)
+    return redirect(request.referrer or '/')
 
 
 @app.route('/logout')
@@ -30,7 +28,7 @@ def logout():
         session.pop('user', None)
         flash("Goodbye, %s!" % user, 'login')
 
-    return redirect('/')
+    return redirect(request.referrer or '/')
 
 
 @app.route('/auth')
