@@ -1,4 +1,3 @@
-import base64
 from flask import request, flash, redirect, session
 
 from catalog import app

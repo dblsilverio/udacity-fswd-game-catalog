@@ -1,11 +1,14 @@
 from catalog.infra.db_factory import DBSession
 
+from catalog.services.utils import refresh_config
+
 
 class BaseDao:
     """ Base class for models. """
 
     def __init__(self):
         self.session = DBSession();
+        self.read_only = refresh_config().getboolean('GameCatalog', 'catalog.read_only')
 
     def __del__(self):
         self.session.close()
@@ -18,7 +21,11 @@ def transacted(func):
         """ Commit or rollback according to underlying  """
         try:
             result = func(self, *args, **kwargs)
-            self.session.commit()
+            if not self.read_only:
+                self.session.commit()
+            else:
+                self.session.rollback()
+
             return result
         except Exception as exception:
             print "Rollbacking due to error: %s" % exception.message

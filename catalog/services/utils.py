@@ -11,6 +11,11 @@ login_path = config.get('GameCatalog', 'catalog.login')
 picture_age = config.getint('GameCatalog', 'catalog.picture_age')
 
 
+def refresh_config():
+    config.read('catalog/configs/catalog.ini')
+    return config
+
+
 def parse_url(func):
     """ Decorator that parses a string url to ParseResult """
 

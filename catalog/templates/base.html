@@ -18,7 +18,7 @@
     {% block extra_imports %}{% endblock %}
 </head>
 <body>
-
+{% if g.read_only %}<div class="alert alert-info text-center"><b>READONLY MODE</b> ~ <span class="text-small">No data is been recorded.</span></div>{% endif %}
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
