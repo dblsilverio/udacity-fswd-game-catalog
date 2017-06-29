@@ -17,6 +17,8 @@ class Game(Base):
     synopsis = Column(Text, nullable=True)
     category_id = Column(Integer, ForeignKey('category.id'))
     category = relationship("Category", backref="games", lazy="joined")
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship("User", backref="games", lazy="joined")
     created = Column(DateTime, default=datetime.now())
     views = Column(Integer, default=0)
 
@@ -30,6 +32,8 @@ class Game(Base):
         self.synopsis = ''
         self.category_id = 0
         self.category = None
+        self.user_id = 0
+        self.user = None
         self.created = None
         self.views = 0
 

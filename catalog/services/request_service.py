@@ -37,5 +37,10 @@ class RequestService:
             return "%s?%s" % (url.path, url.query)
 
     @staticmethod
+    def save_file(url, filename):
+        pic_file = open(name=filename, mode='w')
+        pic_file.write(RequestService().get(url=url))
+
+    @staticmethod
     def is_https(url):
         return url.scheme == 'https'

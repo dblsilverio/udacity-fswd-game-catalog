@@ -70,8 +70,8 @@
                             class="fa fa-facebook-official"
                             aria-hidden="true"></i></a></li>
                     {% else %}
-                        <li><img class="img-responsive img-rounded" src="{{ session['user']['picture'] }}"></li>
-                        <li><a><b>{{ session['user']['name'] }}</b></a></li>
+                        <li><img class="img-responsive img-rounded" src="/static/img/p/{{ session['user'].id }}.jpg"></li>
+                        <li><a><b>{{ session['user'].name }}</b></a></li>
                         <li><a href="/logout">[Sair]</a></li>
                     {% endif %}
                 </ul>

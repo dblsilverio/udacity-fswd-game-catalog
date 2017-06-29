@@ -5,11 +5,10 @@ import urllib
 config = ConfigParser.ConfigParser()
 config.read('catalog/configs/catalog.ini')
 
-print config.defaults()
-
 app_id = config.get('Facebook', 'face.app_id')
 secret = config.get('Facebook', 'face.secret')
 login_path = config.get('GameCatalog', 'catalog.login')
+picture_age = config.getint('GameCatalog', 'catalog.picture_age')
 
 
 def parse_url(func):
