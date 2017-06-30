@@ -9,8 +9,37 @@ The following technologies were applied in the development of this project:
 * [SQLite3](https://www.sqlite.org/)
 * [Flask 0.12](http://flask.pocoo.org/)
 * [SQLAlchemy 1.1](http://www.sqlalchemy.org/)
+* [Facebook API 2.9](https://developers.facebook.com/)
 
 ### Configuration
+
+The first step to setup correctly this project is to prepare you `configs/catalog.ini` configurations, setting all values correctly.
+
+```
+[GameCatalog]
+catalog.login:http://hostname/login
+catalog.read_only:False|True
+catalog.picture_age=2592000000
+catalog.latest_count=6
+
+[Facebook]
+face.app_id:APP_ID
+face.secret:APP_SECRET
+```
+
+#### Read Only Mode
+
+When enabled, every transaction is rollbacked, avoiding data modification.
+
+#### Picture Age
+
+Authenticated user have their pictures cached. When these are older than specified, the subsequent login action will refresh it.
+
+#### Facebook
+
+Facebook login is our trusted way of handling user authentication, facilitating user sign up/sign in.
+
+For a guide on how to setup a Facebook developer account, application id and more, please visit [Facebook Developers Page](https://developers.facebook.com/).
 
 ### Docker
 
