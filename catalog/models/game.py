@@ -68,6 +68,7 @@ class Game(Base):
             'platform': self.platforms(),
             'thumb': self.thumb,
             'category': self.category.to_short_json(False),
+            'synopsis': self.synopsis,
             'sent_by': self.user.to_json(),
             'views': self.views,
             'created_at': self.created,
@@ -84,6 +85,7 @@ class Game(Base):
         j.pop('sent_by', None)
         j.pop('link', None)
         j.pop('developer', None)
+        j['synopsis'] = j['synopsis'][0:100] + '...'
 
         return j
 
