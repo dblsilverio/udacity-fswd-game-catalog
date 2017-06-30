@@ -133,7 +133,8 @@ Result:
     "created_at": "Sun, 25 Jun 2017 15:30:07 GMT", 
     "id": 4, 
     "name": "Age of Empires: Definitive Edition", 
-    "views": 14
+    "synopsis": "A refreshed version of Age of Empires, a real-time strategy game that debuted in 1997. Microsoft, th...", 
+    "views": 16
   }, 
 ```
 
