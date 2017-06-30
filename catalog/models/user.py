@@ -11,6 +11,7 @@ class User(Base):
     email = Column(String(70), nullable=False)
 
     def to_json(self):
+        """ Provides JSON representation. """
         return {
             'id': self.id,
             'name': self.name,
@@ -19,4 +20,5 @@ class User(Base):
 
     @staticmethod
     def build(user_info):
+        """ Build an User with user info provided. """
         return User(name=user_info['name'], email=user_info['email'])

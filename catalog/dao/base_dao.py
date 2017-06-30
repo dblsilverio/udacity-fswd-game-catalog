@@ -1,14 +1,16 @@
+""" Base Dao module providing base class and decorator for models. """
 from catalog.infra.db_factory import DBSession
 
 from catalog.services.utils import refresh_config
 
 
-class BaseDao:
+class BaseDao(object):
     """ Base class for models. """
 
     def __init__(self):
-        self.session = DBSession();
-        self.read_only = refresh_config().getboolean('GameCatalog', 'catalog.read_only')
+        self.session = DBSession()
+        self.read_only = refresh_config().getboolean('GameCatalog',
+                                                     'catalog.read_only')
 
     def __del__(self):
         self.session.close()
@@ -33,4 +35,3 @@ def transacted(func):
             raise
 
     return commit_or_rollback
-

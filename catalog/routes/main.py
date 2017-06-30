@@ -1,8 +1,7 @@
-from catalog import app
+""" Routes for main page """
 from flask import render_template, jsonify
 
-import json
-
+from catalog.infra.flask_factory import app
 from catalog.services.utils import config
 from catalog.services.game_service import GameService
 
@@ -15,7 +14,8 @@ def index():
     latest_games = latest(game_service)
     top10 = game_service.top10()
 
-    return render_template('index.html', latest_games=latest_games, top10=top10)
+    return render_template('index.html', latest_games=latest_games,
+                           top10=top10)
 
 
 @app.route('/latest.json')
@@ -34,4 +34,5 @@ def about():
 
 
 def latest(game_service):
-    return game_service.latest(config.getint('GameCatalog', 'catalog.latest_count'))
+    return game_service.latest(config.getint('GameCatalog',
+                                             'catalog.latest_count'))

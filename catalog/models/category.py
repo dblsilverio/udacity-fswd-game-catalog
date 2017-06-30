@@ -11,9 +11,11 @@ class Category(Base):
     description = Column(Text, nullable=False)
 
     def top_games(self, top):
+        """ Slices game list to top N required. """
         return self.games[0:top]
 
     def to_json(self, load_game=True):
+        """ Provides JSON representation. """
         me_as_json = {
             'id': self.id,
             'name': self.name,
@@ -28,12 +30,13 @@ class Category(Base):
                     'name': g.name,
                     'link': "/game/%d.json" % g.id
                 }
-                    for g in self.games]
+                                     for g in self.games]
             }
 
         return me_as_json
 
     def to_short_json(self, load_games=True):
+        """ Provides a shorter JSON representation. """
         j = self.to_json(load_games)
         j.pop('description', None)
 

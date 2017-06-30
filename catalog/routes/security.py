@@ -1,3 +1,4 @@
+""" Provides decorator for securing CRUD(and others) routes. """
 from functools import wraps
 from flask import redirect, flash, session
 

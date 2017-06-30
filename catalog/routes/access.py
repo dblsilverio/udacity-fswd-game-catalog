@@ -1,6 +1,6 @@
 from flask import request, flash, redirect, session
 
-from catalog import app
+from catalog.infra.flask_factory import app
 from catalog.services.user_service import UserService
 from catalog.services.facebook_service import FacebookService
 
@@ -14,7 +14,7 @@ def login():
     if user:
         new_session(user)
     else:
-        session.clear
+        session.clear()
 
     return redirect(request.referrer or '/')
 

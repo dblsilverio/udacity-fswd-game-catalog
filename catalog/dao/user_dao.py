@@ -7,7 +7,10 @@ class UserDao(BaseDao):
 
     @transacted
     def merge(self, user):
+        """ Inserts/merges a user. """
         return self.session.merge(user)
 
     def find_user(self, user):
-        return self.session.query(User).filter(User.email == user.email).first()
+        """ Finds users by email. """
+        return self.session.query(User).filter(User.email == user.email)\
+            .first()

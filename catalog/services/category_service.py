@@ -1,7 +1,7 @@
 from catalog.dao.category_dao import CategoryDao
 
 
-class CategoryService:
+class CategoryService(object):
     """ Provider of common services and operations for a Category entity. """
 
     def __init__(self):
@@ -11,8 +11,8 @@ class CategoryService:
         try:
             self.dao.merge(category)
             return True
-        except Exception as e:
-            print "Error persisting category: %s" % e.message
+        except Exception as exc:
+            print "Error persisting category: %s" % exc.message
             return False
 
     def find_by_id(self, cid, join_games=False):

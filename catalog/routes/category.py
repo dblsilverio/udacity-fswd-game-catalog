@@ -1,11 +1,12 @@
-from catalog import app
+""" Provides routes for Category listing and detail """
 from flask import render_template, request, flash, redirect, jsonify
 
-from .security import protected
-
+from catalog.infra.flask_factory import app
 from catalog.models.category import Category
 from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
+
+from .security import protected
 
 
 @app.route('/category', methods=['GET'])
@@ -42,24 +43,24 @@ def category_new():
 
 @app.route('/category/<int:cid>', methods=['GET'])
 def category_detail(cid):
-    c = CategoryService().find_by_id(cid)
-    if not c:
+    cat = CategoryService().find_by_id(cid)
+    if not cat:
         flash('Category not found', 'warning')
         return redirect('/category')
 
-    gs = GameService().find_by_category(c)
+    games = GameService().find_by_category(cat)
 
-    return render_template("category.html", category=c, games=gs)
+    return render_template("category.html", category=cat, games=games)
 
 
 @app.route('/category/<int:cid>.json', methods=['GET'])
 def category_detail_json(cid):
-    c = CategoryService().find_by_id(cid, True)
+    cat = CategoryService().find_by_id(cid, True)
 
-    if not c:
+    if not cat:
         return jsonify({}), 404
 
-    return jsonify(c.to_json())
+    return jsonify(cat.to_json())
 
 
 @app.route('/category/<int:cid>/delete', methods=['POST'])
@@ -74,8 +75,8 @@ def delete_category(cid):
     try:
         category_service.delete(cat)
         flash('Category removed', 'info')
-    except Exception as e:
-        flash("Error deleting category: %s" % e.message, 'danger')
+    except Exception as exc:
+        flash("Error deleting category: %s" % exc.message, 'danger')
 
     return redirect('/category')
 

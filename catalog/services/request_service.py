@@ -6,14 +6,15 @@ from StringIO import StringIO
 from catalog.services.utils import parse_url
 
 
-class RequestService:
+class RequestService(object):
     def __init__(self):
         pass
 
     @parse_url
-    def get(self, url, is_json=False, **params):
+    def get(self, url, is_json=False):
         conn = RequestService.get_connection(url)
-        conn.request(method='GET', url=RequestService.full_url(url), headers={'User-Agent': 'GameCatalog 1.0 Client'})
+        conn.request(method='GET', url=RequestService.full_url(url),
+                     headers={'User-Agent': 'GameCatalog 1.0 Client'})
 
         resp = conn.getresponse().read()
 
@@ -24,6 +25,8 @@ class RequestService:
 
     @staticmethod
     def get_connection(url):
+        conn = None
+
         if RequestService.is_https(url):
             conn = httplib.HTTPSConnection(url.netloc)
         else:

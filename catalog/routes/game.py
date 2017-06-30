@@ -1,12 +1,13 @@
-from catalog import app
+""" Routes for game operation and navigation. """
 from flask import render_template, request, flash, redirect, jsonify
 
-from .security import protected
-from .utils import page_view
-
+from catalog.infra.flask_factory import app
 from catalog.models.game import Game
 from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
+
+from .security import protected
+from .utils import page_view
 
 
 @app.route('/game', methods=['GET'])
@@ -36,10 +37,10 @@ def game_form():
 @app.route('/game/new', methods=['POST'])
 @protected
 def game_new():
-    game = validate_game()
-    print game
-    if game:
-        if GameService().new(game):
+    v_game = validate_game()
+
+    if v_game:
+        if GameService().new(v_game):
             flash('New game added', 'success')
         else:
             flash('Error adding game', 'danger')
@@ -50,23 +51,23 @@ def game_new():
 @app.route('/game/<int:gid>', methods=['GET'])
 @page_view
 def game_detail(gid):
-    game = GameService().find_by(gid)
+    game_d = GameService().find_by(gid)
 
-    if not game:
+    if not game_d:
         flash("Game with id %d not found" % gid, "warning")
         return redirect("/game")
 
-    return render_template("game.html", game=game)
+    return render_template("game.html", game=game_d)
 
 
 @app.route('/game/<int:gid>.json', methods=['GET'])
 def game_detail_json(gid):
-    game = GameService().find_by(gid, True)
+    game_d = GameService().find_by(gid, True)
 
-    if not game:
+    if not game_d:
         return jsonify({}), 404
 
-    return jsonify(game.to_json())
+    return jsonify(game_d.to_json())
 
 
 @app.route('/game/<int:gid>/delete', methods=['POST'])
@@ -74,16 +75,16 @@ def game_detail_json(gid):
 def delete_game(gid):
     game_service = GameService()
 
-    g = game_service.find_by(gid)
+    game_delete = game_service.find_by(gid)
 
-    if not g:
+    if not game_delete:
         flash('Game not found', 'warning')
 
     try:
-        game_service.delete(g)
+        game_service.delete(game_delete)
         flash('Game removed', 'info')
-    except Exception as e:
-        flash('Error deleting game: %s' % e.message, 'danger')
+    except Exception as exc:
+        flash('Error deleting game: %s' % exc.message, 'danger')
 
     return redirect('/game')
 
@@ -94,14 +95,14 @@ def update_game_form(gid):
     game_service = GameService()
     category_service = CategoryService()
 
-    g = game_service.find_by(gid)
+    game_update = game_service.find_by(gid)
 
-    if not g:
+    if not game_update:
         flash('Game not found', 'warning')
         return redirect('/game')
 
-    return render_template("game_form.html", game=g,
-                           target_url="/game/%d/update" % g.id,
+    return render_template("game_form.html", game=game_update,
+                           target_url="/game/%d/update" % game_update.id,
                            categories=category_service.all())
 
 
@@ -124,6 +125,7 @@ def update_game(gid):
 
 @app.route('/game/platform/<string:plat>', methods=['GET'])
 def platform_games(plat):
+    """ Lists games by specified platform. """
     platform_results = GameService().find_by_platform(plat)
 
     if not platform_results['platform']:
@@ -171,10 +173,12 @@ def validate_game():
         category = int(category)
 
     if not thumb or len(thumb.strip()) == 0:
-        flash('One thumb image might be interesting for other gamer!', 'warning')
+        flash('One thumb image might be interesting for other gamer!',
+              'warning')
 
     if not synopsis or len(synopsis.strip()) == 0:
-        flash('Come back later and write a good synopsis to help other players!', 'warning')
+        flash('Come back later and write a good synopsis to help '
+              'other players!', 'warning')
 
     if not invalid:
         return Game(name=name, developer=developer, publisher=publisher,

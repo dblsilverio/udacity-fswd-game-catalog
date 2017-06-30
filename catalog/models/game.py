@@ -12,7 +12,7 @@ class Game(Base):
     name = Column(String(40), nullable=False, unique=True)
     developer = Column(String(30), nullable=False)
     publisher = Column(String(30), nullable=False)
-    platform = Column(String(10), nullable=False)  # need table
+    platform = Column(String(10), nullable=False)
     thumb = Column(String(500), nullable=True)
     synopsis = Column(Text, nullable=True)
     category_id = Column(Integer, ForeignKey('category.id'))
@@ -40,6 +40,7 @@ class Game(Base):
         return self
 
     def platforms(self):
+        """ Returns an user friendly array with platforms names. """
         plat_str = Game.plat_array(self.platform)
         plat_arr = []
 
@@ -54,9 +55,11 @@ class Game(Base):
         return plat_arr
 
     def has_platform(self, name):
+        """ Verifies if a game has a given platform informed. """
         return name in Game.plat_array(self.platform)
 
     def to_json(self):
+        """ Provides JSON representation. """
         return {
             'id': self.id,
             'name': self.name,
@@ -72,6 +75,7 @@ class Game(Base):
         }
 
     def to_short_json(self):
+        """ Provides a shorter JSON representation. """
         j = self.to_json()
         j.pop('publisher', None)
         j.pop('platform', None)
@@ -85,4 +89,5 @@ class Game(Base):
 
     @staticmethod
     def plat_array(plat_str):
+        """ Splits platform string into an array. """
         return plat_str.split('|')

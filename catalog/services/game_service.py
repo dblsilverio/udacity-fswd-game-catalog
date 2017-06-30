@@ -38,9 +38,11 @@ class GameService:
         return {'platform': plat_name + ' Games', 'games': games}
 
     def latest(self, batch_num):
+        """ Returns the most recent N inserted games. """
         return self.dao.latest(batch_num)
 
     def increment(self, gid):
+        """ Add 1 to game view count. """
         self.dao.increment(gid)
 
     def top10(self):
@@ -48,6 +50,7 @@ class GameService:
 
     @staticmethod
     def mapped_platforms(plat):
+        """ Maps categories acronym for user readable format. """
         if plat == 'pc':
             return 'PC'
         elif plat == 'xo':

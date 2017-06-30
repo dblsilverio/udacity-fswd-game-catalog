@@ -3,11 +3,10 @@ from sqlalchemy.orm import joinedload
 
 from flask import session
 
-from catalog.services.user_service import UserService
-from catalog.models.user import User
-
-from catalog.dao.base_dao import BaseDao, transacted
 from catalog.models.game import Game
+from catalog.models.user import User
+from catalog.dao.base_dao import BaseDao, transacted
+from catalog.services.user_service import UserService
 
 
 class GameDao(BaseDao):
@@ -19,12 +18,12 @@ class GameDao(BaseDao):
         return self.session.query(Game).order_by(Game.name)
 
     def find_by_id(self, gid, join_category=False):
-        q = self.session.query(Game)
+        query = self.session.query(Game)
 
         if join_category:
-            q = q.options(joinedload(Game.category, innerjoin=True))
+            query = query.options(joinedload(Game.category, innerjoin=True))
 
-        return q.get(gid)
+        return query.get(gid)
 
     @transacted
     def merge(self, game):
