@@ -46,4 +46,7 @@
         </div>
     {% endfor %}
     </div>
+    <script>
+        var csrf_token = "{{ csrf_token() }}";
+    </script>
 {% endblock %}

@@ -33,6 +33,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/403', methods=['GET'])
+def forbidden():
+    return render_template('403.html'), 403
+
+
 def latest(game_service):
     return game_service.latest(config.getint('GameCatalog',
                                              'catalog.latest_count'))

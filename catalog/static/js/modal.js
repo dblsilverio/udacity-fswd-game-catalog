@@ -31,10 +31,17 @@ function delete_game(gid, name) {
 }
 
 var deleteForm = function (url) {
+
+    var csrf = document.createElement('input');
+    csrf.type = 'hidden';
+    csrf.value = csrf_token;
+    csrf.name = '_csrf_token';
+
     var delForm = document.createElement('form');
     delForm.id = 'deletion_frm';
     delForm.method = 'post';
     delForm.action = url;
+    delForm.appendChild(csrf);
     document.body.appendChild(delForm);
 
     delForm.submit();
