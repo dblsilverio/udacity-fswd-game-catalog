@@ -14,7 +14,6 @@ class Category(Base):
         return self.games[0:top]
 
     def to_json(self, load_game=True):
-
         me_as_json = {
             'id': self.id,
             'name': self.name,
@@ -23,7 +22,14 @@ class Category(Base):
         }
 
         if load_game:
-            me_as_json['games'] = len(self.games)
+            me_as_json['games'] = {
+                'quantity': len(self.games),
+                'available_titles': [{
+                    'name': g.name,
+                    'link': "/game/%d.json" % g.id
+                }
+                    for g in self.games]
+            }
 
         return me_as_json
 
