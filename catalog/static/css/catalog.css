@@ -38,6 +38,10 @@ body {
     max-height: 140px;
 }
 
+.endpoint{
+    font-size: 100px;
+}
+
 /*
 Dropdown submenu
  */

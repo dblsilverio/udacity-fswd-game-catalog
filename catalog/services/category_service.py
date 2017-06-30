@@ -15,8 +15,8 @@ class CategoryService:
             print "Error persisting category: %s" % e.message
             return False
 
-    def find_by_id(self, cid):
-        return self.dao.find_by_id(cid)
+    def find_by_id(self, cid, join_games=False):
+        return self.dao.find_by_id(cid, join_games)
 
     def all(self):
         return self.dao.find_all()

@@ -1,4 +1,5 @@
 from sqlalchemy.sql import text
+from sqlalchemy.orm import joinedload
 
 from flask import session
 
@@ -17,8 +18,13 @@ class GameDao(BaseDao):
     def find_all(self):
         return self.session.query(Game).order_by(Game.name)
 
-    def find_by_id(self, gid):
-        return self.session.query(Game).get(gid)
+    def find_by_id(self, gid, join_category=False):
+        q = self.session.query(Game)
+
+        if join_category:
+            q = q.options(joinedload(Game.category, innerjoin=True))
+
+        return q.get(gid)
 
     @transacted
     def merge(self, game):

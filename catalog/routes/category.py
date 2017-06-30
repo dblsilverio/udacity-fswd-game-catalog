@@ -1,5 +1,5 @@
 from catalog import app
-from flask import render_template, request, flash, redirect
+from flask import render_template, request, flash, redirect, jsonify
 
 from .security import protected
 
@@ -12,6 +12,11 @@ from catalog.services.game_service import GameService
 def category():
     categories = CategoryService().all()
     return render_template("category_index.html", categories=categories)
+
+
+@app.route('/category.json', methods=['GET'])
+def category_json():
+    return jsonify([c.to_short_json() for c in CategoryService().all()])
 
 
 @app.route('/category/new', methods=['GET'])
@@ -45,6 +50,16 @@ def category_detail(cid):
     gs = GameService().find_by_category(c)
 
     return render_template("category.html", category=c, games=gs)
+
+
+@app.route('/category/<int:cid>.json', methods=['GET'])
+def category_detail_json(cid):
+    c = CategoryService().find_by_id(cid, True)
+
+    if not c:
+        return jsonify({}), 404
+
+    return jsonify(c.to_json())
 
 
 @app.route('/category/<int:cid>/delete', methods=['POST'])

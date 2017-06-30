@@ -20,7 +20,7 @@
                 data-target="#confirmation_modal"
                 onclick="delete_game({{ game.id }},'{{ game.name }}')
                         ">Remove
-        </button>{% endif %}
+        </button>{% endif %} <a href="/game/{{ game.id }}.json"><i class="fa fa-superpowers endpoint" aria-hidden="true"></i></a>
     </h3>
     <div class="form-group">
         <img

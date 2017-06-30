@@ -15,8 +15,8 @@ class GameService:
             print "Error persisting game: %s" % e.message
             return False
 
-    def find_by(self, gid):
-        return self.dao.find_by_id(gid)
+    def find_by(self, gid, join_category=False):
+        return self.dao.find_by_id(gid, join_category)
 
     def find_by_category(self, c, limit=0):
         return self.dao.find_by_category(c, limit)

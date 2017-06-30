@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-md-9 col-lg-9">
             <div class="row">
-                <h2>Latest Games Inserted</h2>
+                <h2 class="col-md-12">Latest Games Inserted <a href="/latest.json"><i class="fa fa-superpowers endpoint" aria-hidden="true"></i></a></h2>
             </div>
             <div class="row">
             {% for game in latest_games %}
@@ -48,7 +48,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th><h2 class="text-center">Top 10 Views</h2></th>
+                    <th><h2 class="text-center">Top 10 <a href="/top10.json"><i class="fa fa-superpowers endpoint" aria-hidden="true"></i></a></h2></th>
                 </tr>
                 </thead>
                 <tbody>{% for game in top10 %}

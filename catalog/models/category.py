@@ -12,3 +12,23 @@ class Category(Base):
 
     def top_games(self, top):
         return self.games[0:top]
+
+    def to_json(self, load_game=True):
+
+        me_as_json = {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'link': "/category/%d" % self.id
+        }
+
+        if load_game:
+            me_as_json['games'] = len(self.games)
+
+        return me_as_json
+
+    def to_short_json(self, load_games=True):
+        j = self.to_json(load_games)
+        j.pop('description', None)
+
+        return j

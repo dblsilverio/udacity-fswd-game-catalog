@@ -12,7 +12,7 @@ class Game(Base):
     name = Column(String(40), nullable=False, unique=True)
     developer = Column(String(30), nullable=False)
     publisher = Column(String(30), nullable=False)
-    platform = Column(String(10), nullable=False) #need table
+    platform = Column(String(10), nullable=False)  # need table
     thumb = Column(String(500), nullable=True)
     synopsis = Column(Text, nullable=True)
     category_id = Column(Integer, ForeignKey('category.id'))
@@ -55,6 +55,33 @@ class Game(Base):
 
     def has_platform(self, name):
         return name in Game.plat_array(self.platform)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'developer': self.developer,
+            'publisher': self.publisher,
+            'platform': self.platforms(),
+            'thumb': self.thumb,
+            'category': self.category.to_short_json(False),
+            'sent_by': self.user.to_json(),
+            'views': self.views,
+            'created_at': self.created,
+            'link': "/game/%d" % self.id
+        }
+
+    def to_short_json(self):
+        j = self.to_json()
+        j.pop('publisher', None)
+        j.pop('platform', None)
+        j.pop('thumb', None)
+        j.pop('category', None)
+        j.pop('sent_by', None)
+        j.pop('link', None)
+        j.pop('developer', None)
+
+        return j
 
     @staticmethod
     def plat_array(plat_str):
