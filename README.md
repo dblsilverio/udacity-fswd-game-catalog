@@ -59,6 +59,12 @@ Run `FLASK_APP=catalog flask run` at root path to start. Project will be online 
 
 For debugging purposes, add `FLASK_DEBUG=true` while starting Flask.
 
+### First Run
+
+The first Game Catalog starts, it will fetch categories table and, if no entry exists, it will bootstrap a few categories to facilitate initial setup.
+
+You may add or remove categories from this bootstrap file at `catalog/resources/categories.csv`.
+
 ## Api Endpoints
 
 ### Latest Games Cataloged
