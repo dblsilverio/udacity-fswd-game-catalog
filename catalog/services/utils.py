@@ -27,6 +27,8 @@ def parse_url(func):
 
 
 class Urls(object):
+    """ Wraps URLs creation, formatting and concatenating data when
+    needed."""
     def __init__(self):
         pass
 
