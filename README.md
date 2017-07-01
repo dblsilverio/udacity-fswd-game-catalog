@@ -47,6 +47,12 @@ Running this project as a container is very simple.
 
 Run `user:~/$ docker-image/builder.sh`, and your Game Catalog instance will be readily online on port **5000**. The build process will take care of everything needed to run correctly this project.
 
+#### Backing Up the Database
+
+SQLite database *game-catalog* is located under the path */udacity/catalog/game-catalog.db*. Run this command to create a copy outside of the container: 
+
+`docker cp game-catalog:/udacity/game-catalog.db /my-backups-folder/`
+
 ### Standalone
 
 Running Game Catalog demands Python 2.X and few modules to be installed by user.
