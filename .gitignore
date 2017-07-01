@@ -108,5 +108,5 @@ ENV/
 *.bkp
 
 # Catalog properties
-/configs/catalog.ini
+configs/catalog.ini
 img/p/
