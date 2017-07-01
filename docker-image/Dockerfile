@@ -9,6 +9,7 @@ RUN apk add --update \
     python-dev \
     py-pip \
     build-base \
+    ca-certificates \
   && pip install \
      sqlalchemy \
      flask \

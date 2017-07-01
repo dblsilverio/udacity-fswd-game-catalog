@@ -8,7 +8,7 @@ mkdir resources/
 cp ../setup.py resources/
 cp -r ../catalog/ resources/
 
-echo "Build image. This may take a while..."
+echo "Building image. This may take a while..."
 docker build --tag game-catalog:1.0 . &>/dev/null
 
 if [ $? -ne 0 ]; then
