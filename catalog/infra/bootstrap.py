@@ -20,7 +20,8 @@ class Bootstrap(object):
         category_service = CategoryService()
         if not category_service.all().count():
             print "Creating categories..."
-            cat_file = open(os.getcwd() + '/catalog/resources/categories.csv',
+            cat_file = open(os.environ['CATALOG_PATH'] +
+                            '/catalog/resources/categories.csv',
                             'r')
             for line in cat_file:
                 if line.startswith("#"):
