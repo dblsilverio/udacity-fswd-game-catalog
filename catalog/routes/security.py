@@ -33,7 +33,7 @@ def check_owner(model_type):
             if not SecurityService().is_owner(model_type, **kwargs):
                 flash('User is not authorized to modify specified resource.',
                       'danger')
-                return redirect(request.referrer or '/game')
+                return redirect(request.referrer or '/')
 
             return func(*args, **kwargs)
 

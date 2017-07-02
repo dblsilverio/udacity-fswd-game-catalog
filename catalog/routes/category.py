@@ -6,7 +6,7 @@ from catalog.models.category import Category
 from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
 
-from .security import protected
+from .security import protected, check_owner
 
 
 @app.route('/category', methods=['GET'])
@@ -65,6 +65,7 @@ def category_detail_json(cid):
 
 @app.route('/category/<int:cid>/delete', methods=['POST'])
 @protected
+@check_owner(Category)
 def delete_category(cid):
     category_service = CategoryService()
     cat = category_service.find_by_id(cid)
@@ -83,6 +84,7 @@ def delete_category(cid):
 
 @app.route('/category/<int:cid>/update', methods=['GET'])
 @protected
+@check_owner(Category)
 def update_category_form(cid):
     cat = CategoryService().find_by_id(cid)
 
@@ -96,6 +98,7 @@ def update_category_form(cid):
 
 @app.route('/category/<int:cid>/update', methods=['POST'])
 @protected
+@check_owner(Category)
 def update_category(cid):
     updated_category = validate_category()
 

@@ -1,4 +1,5 @@
-from sqlalchemy import Column, String, Integer, Text
+from sqlalchemy import Column, String, Integer, Text, ForeignKey
+from sqlalchemy.orm import relationship
 from catalog.infra.db_factory import Base
 
 
@@ -9,6 +10,8 @@ class Category(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=False)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship("User", backref="categories", lazy="joined")
 
     def top_games(self, top):
         """ Slices game list to top N required. """

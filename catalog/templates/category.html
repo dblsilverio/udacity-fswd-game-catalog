@@ -14,8 +14,18 @@
 {% endblock %}
 
 {% block body %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="list-group">
+                {% for category, message in messages %}
+                    <li class="list-group-item list-group-item-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <h3><b>{{ games|length }}</b> game(s) found for <b>{{ category.name }}</b>
-        category{% if session['user'] %}
+        category{% if session['user'] and session['user']['id'] == category
+        .user_id %}
         <a class="btn btn-warning btn-sm" href="/category/{{ category.id
                 }}/update">Edit</a>&nbsp;
         <button class="btn btn-danger btn-sm" data-toggle="modal"
