@@ -6,7 +6,7 @@ from catalog.models.game import Game
 from catalog.services.category_service import CategoryService
 from catalog.services.game_service import GameService
 
-from .security import protected
+from .security import protected, check_owner
 from .utils import page_view
 
 
@@ -72,6 +72,7 @@ def game_detail_json(gid):
 
 @app.route('/game/<int:gid>/delete', methods=['POST'])
 @protected
+@check_owner(Game)
 def delete_game(gid):
     game_service = GameService()
 
@@ -91,6 +92,7 @@ def delete_game(gid):
 
 @app.route('/game/<int:gid>/update', methods=['GET'])
 @protected
+@check_owner(Game)
 def update_game_form(gid):
     game_service = GameService()
     category_service = CategoryService()
@@ -108,6 +110,7 @@ def update_game_form(gid):
 
 @app.route('/game/<int:gid>/update', methods=['POST'])
 @protected
+@check_owner(Game)
 def update_game(gid):
     updated_game = validate_game()
 
