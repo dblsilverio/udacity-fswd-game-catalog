@@ -9,7 +9,8 @@ from catalog.services.utils import picture_age
 
 class UserService:
 
-    PICTURE_PATH = os.environ['CATALOG_PATH'] + "catalog/static/img/p/%s.jpg"
+    PICTURE_PATH = os.environ.get('CATALOG_PATH') + \
+                   "catalog/static/img/p/%s.jpg"
 
     def __init__(self):
         self.dao = UserDao()

@@ -4,7 +4,7 @@ import urllib
 import os
 
 config = ConfigParser.ConfigParser()
-config.read(os.environ['CATALOG_PATH'] + 'catalog/configs/catalog.ini')
+config.read(os.environ.get('CATALOG_PATH') + 'catalog/configs/catalog.ini')
 
 app_id = config.get('Facebook', 'face.app_id')
 secret = config.get('Facebook', 'face.secret')
@@ -13,7 +13,7 @@ picture_age = config.getint('GameCatalog', 'catalog.picture_age')
 
 
 def refresh_config():
-    config.read(os.environ['CATALOG_PATH'] + 'catalog/configs/catalog.ini')
+    config.read(os.environ.get('CATALOG_PATH') + 'catalog/configs/catalog.ini')
     return config
 
 

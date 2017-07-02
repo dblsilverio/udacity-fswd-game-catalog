@@ -20,7 +20,7 @@ class Bootstrap(object):
         category_service = CategoryService()
         if not category_service.all().count():
             print "Creating categories..."
-            cat_file = open(os.environ['CATALOG_PATH'] +
+            cat_file = open(os.environ.get('CATALOG_PATH') +
                             '/catalog/resources/categories.csv',
                             'r')
             for line in cat_file:
