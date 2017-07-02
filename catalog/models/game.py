@@ -9,7 +9,7 @@ class Game(Base):
     __tablename__ = 'game'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(40), nullable=False, unique=True)
+    name = Column(String(100), nullable=False, unique=True)
     developer = Column(String(30), nullable=False)
     publisher = Column(String(30), nullable=False)
     platform = Column(String(10), nullable=False)

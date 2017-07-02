@@ -9,7 +9,7 @@ cp ../setup.py resources/
 cp -r ../catalog/ resources/
 
 echo "Building image. This may take a while..."
-docker build --tag game-catalog:1.0 . &>/dev/null
+docker build --tag game-catalog:1.1 . &>/dev/null
 
 if [ $? -ne 0 ]; then
     echo "Error building image :)"
@@ -25,7 +25,7 @@ else
 
     echo "Running container..."
 
-    docker run --name game-catalog -d -p 5000:5000 game-catalog:1.0
+    docker run --name game-catalog -d -p 5000:5000 game-catalog:1.1
 
     if [ $? -ne 0 ]; then
         echo "Error running container ='("

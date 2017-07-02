@@ -4,7 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 Base = declarative_base()
-engine = create_engine('sqlite:///game-catalog.db')
+engine = create_engine('postgresql+psycopg2://catalog:catalog@127.0.0.1:5432'
+                       '/catalog')
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
